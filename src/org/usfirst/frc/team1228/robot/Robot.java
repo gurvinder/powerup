@@ -14,27 +14,36 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 public class Robot extends IterativeRobot{
 	
+	//<DRIVERSTATION ALLIANCE DATA>
 	private static String AUTONOMOUS_GAMEDATA;
+	//</DRIVERSTATION ALLIANCE DATA>
 
 	//<INITIATING JOYSTICK COMPONENTS>
 	private static final int PS4_CONTROLLER_ID = 0;
 	Joystick PS4_JOYSTICK_CONTROLLER = new Joystick(PS4_CONTROLLER_ID);
 	//</INITIATING JOYSTICK COMPONENTS>
 	
-	//<INITIATING GYROSCOPE>
-	AHRS GYROSCOPE;
+	//<INITIATING GYROSCOPE_YAW>
+	AHRS GYROSCOPE_YAW;
+	AHRS GYROSCOPE_EXPERIMENTAL;
 	public static float TEMPORARY_GYRO_HEADING = 0;
-	//</INITIATING GYROSCOPE>
+	//</INITIATING GYROSCOPE_YAW>
 	
-	//<INITIATING SENSORS>
+	//<INITIATING ACCELER0METER>
+	Accelerometer accel = new BuiltInAccelerometer(Accelerometer.Range.k4G); 
+	//</INITIATING ACCELER0METER>
+	
+	//<INITIATING ENCODER>
 	Encoder LIFT_GEARBOX_ENCODER = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	private static final double PULSES_PER_REVOLUTION = 1024;
 	private static final double DISTANCE_PER_REVOLUTION = 1;
-	//</INITIATING SENSORS>
+	//</INITIATING ENCODER>
 	
 	//<INITIATING MOTORCONTROLLER COMPONENTS>
 	private static final int LEFT_FRONT_MOTOR_ID = 2; 
@@ -70,56 +79,75 @@ public class Robot extends IterativeRobot{
 	
 	@Override public void robotInit(){
 		MAIN_DIFFERENTIAL_DRIVETRAIN.setSafetyEnabled(true);
-		try { GYROSCOPE = new AHRS(SerialPort.Port.kUSB);}
-		catch (RuntimeException x) {
-	          DriverStation.reportError("Error instantiating Gyroscope:  " + x.getMessage(), true);}
-		LIFT_GEARBOX_ENCODER.setMaxPeriod(.4);
-		LIFT_GEARBOX_ENCODER.setDistancePerPulse(DISTANCE_PER_REVOLUTION / PULSES_PER_REVOLUTION);
-		LIFT_GEARBOX_ENCODER.setMinRate(10);
-		LIFT_GEARBOX_ENCODER.setReverseDirection(false);
-		LIFT_GEARBOX_ENCODER.setSamplesToAverage(10);
-	}
+		try { 
+			GYROSCOPE_YAW = new AHRS(SerialPort.Port.kUSB);
+			GYROSCOPE_EXPERIMENTAL = new AHRS(SerialPort.Port.kUSB1);}
+		catch (RuntimeException x){
+	          DriverStation.reportError("Error instantiating GYROSCOPE_YAW:  " + x.getMessage(), true);}}
 	
 	@Override public void autonomousInit(){
 		LEFT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.setInverted(true);
 		RIGHT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.setInverted(false);
-		//GYROSCOPE.zeroYaw();
-		AUTONOMOUS_GAMEDATA = DriverStation.getInstance().getGameSpecificMessage();}
+		GYROSCOPE_YAW.zeroYaw();
+		GYROSCOPE_YAW.resetDisplacement();
+		AUTONOMOUS_GAMEDATA = DriverStation.getInstance().getGameSpecificMessage();
+		DriverStation.reportWarning("Autonomous Initiated", false);
+	}
 	
-	@Override public void autonomousPeriodic(){
-		/*if(GYROSCOPE.getYaw() > TEMPORARY_GYRO_HEADING){
-			LEFT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(0.35);
-			RIGHT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(0.3);
-		}else if(GYROSCOPE.getYaw() < TEMPORARY_GYRO_HEADING){
-			LEFT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(0.3);
-			RIGHT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(0.35);
-		}*/
+	double motorvaluesone = 0.0;
+	double motorvaluestwo = 0.0;
+	
+	@Override public void autonomousPeriodic(){drive();}
+	
+	public void drive(){
+		if(GYROSCOPE_YAW.getYaw() > TEMPORARY_GYRO_HEADING + 5){
+			motorvaluesone = 0.6;
+			motorvaluestwo = 0.5;
+		}else if(GYROSCOPE_YAW.getYaw() > TEMPORARY_GYRO_HEADING){
+			motorvaluesone = 0.60;
+			motorvaluestwo = 0.53;}
+		
+		if(GYROSCOPE_YAW.getYaw() < TEMPORARY_GYRO_HEADING - 5){
+			motorvaluesone = 0.5;
+			motorvaluestwo = 0.6;
+		}else if(GYROSCOPE_YAW.getYaw() < TEMPORARY_GYRO_HEADING){
+			motorvaluesone = 0.53;
+			motorvaluestwo = 0.60;}
+		
+		LEFT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(motorvaluesone);
+		RIGHT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(motorvaluestwo);
+		Timer.delay(0.05);
+		LEFT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(motorvaluesone/1.5);
+		RIGHT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.set(motorvaluestwo/1.5);
 	}
 	
 	@Override public void teleopInit(){
 		LEFT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.setInverted(true);
-		RIGHT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.setInverted(true);}
+		RIGHT_DRIVETRAIN_SPEED_CONTROLLER_GROUP.setInverted(true);
+		DriverStation.reportWarning("Teleop Initiated", false);
+	}
+	
+	double LIFT_CONTROLLER_VALUE = 0;
 	
 	@Override public void teleopPeriodic(){
-		while(isOperatorControl() && isEnabled()){
-			MAIN_DIFFERENTIAL_DRIVETRAIN.arcadeDrive(-(PS4_JOYSTICK_CONTROLLER.getY()), -(PS4_JOYSTICK_CONTROLLER.getZ()));
-			
-			if(PS4_JOYSTICK_CONTROLLER.getRawButton(1)){
-				INTAKE_SPEED_CONTROLLER_GROUP.set(.50); Timer.delay(.1); INTAKE_SPEED_CONTROLLER_GROUP.set(0);
-			}else if(PS4_JOYSTICK_CONTROLLER.getRawButton(2)){
-				INTAKE_SPEED_CONTROLLER_GROUP.set(1); Timer.delay(.1); INTAKE_SPEED_CONTROLLER_GROUP.set(0);
-			}else if(PS4_JOYSTICK_CONTROLLER.getRawButton(3)) {
-				INTAKE_SPEED_CONTROLLER_GROUP.set(-.50); Timer.delay(.1); INTAKE_SPEED_CONTROLLER_GROUP.set(0);
-			}else if(PS4_JOYSTICK_CONTROLLER.getRawButton(4)) {
-				INTAKE_SPEED_CONTROLLER_GROUP.set(-1); Timer.delay(.1); INTAKE_SPEED_CONTROLLER_GROUP.set(0);}
-			
-			switch(PS4_JOYSTICK_CONTROLLER.getPOV()){
-				case 0: LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(.50);break;
-				case 90: LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(1);break;
-				case 180: LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(-.50);break;
-				case 270: LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(-1);break;
-				default: LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(0); break;}
-			Timer.delay(.1); LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(0);}}
+		if(isOperatorControl() && isEnabled()){
+			updateLiftGearbox();
+			updateDrivetrain();}}
+	
+	public void updateLiftGearbox(){
+		switch(PS4_JOYSTICK_CONTROLLER.getPOV()){
+			case 0: LIFT_CONTROLLER_VALUE = 0.5; break;
+			case 90: LIFT_CONTROLLER_VALUE = 0.75; break;
+			case 180: LIFT_CONTROLLER_VALUE = -0.5; break;
+			case 270: LIFT_CONTROLLER_VALUE = -0.75; break;
+			default: LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(0); break;}
+		LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(LIFT_CONTROLLER_VALUE);
+		LIFT_CONTROLLER_VALUE /= 1.5; Timer.delay(.05); 
+		LIFT_GEARBOX_SPEED_CONTROLLER_GROUP.set(LIFT_CONTROLLER_VALUE);}
+	
+	public void updateDrivetrain(){
+		if(PS4_JOYSTICK_CONTROLLER.getZ() > 0.05 || PS4_JOYSTICK_CONTROLLER.getZ() < -0.05){
+			MAIN_DIFFERENTIAL_DRIVETRAIN.arcadeDrive(-(PS4_JOYSTICK_CONTROLLER.getY()), -(PS4_JOYSTICK_CONTROLLER.getZ()));}}
 	
 	@Override public void testPeriodic(){}
 	@Override public void disabledInit(){}
