@@ -1,7 +1,7 @@
 # ![frcpowerup2018](https://static.wixstatic.com/media/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png/v1/crop/x_0,y_0,w_976,h_498/fill/w_300,h_150,al_c,usm_0.66_1.00_0.01/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png)
-# Rahway Robotribe Robotics FRC Team #1228 
+## Rahway Robotribe Robotics FRC Team #1228 
 This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Programmer] for the team. This code was written between Janruary - March 2018 [FIRST build season] and has been updated during/after competition season for various reasons including but not limited to changing PWM ports, addition/deletion of physical sensors, etc.
-* [Prerequisites](#prerequisites)
+* [Requirements](#requirements)
   * Eclipse IDE
   * Java 8 JDK
   * Install the correct development plugins
@@ -9,11 +9,10 @@ This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Progr
   * Program the Radio
 * [Installation](#installation)
 
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. These instructions will also help you deploy your code to the roboRio. See prerequisites & blank for notes on how to deploy the project on a live system.
+### Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. These instructions will also help you deploy your code to the roboRio. See requirements & blank for notes on how to deploy the project on a live system.
 
-Prerequisites
---------------
+### Requirements ###
 * [Eclipse IDE](https://www.eclipse.org/downloads/) - Used to compile/build and deploy code to roboRio.
 * [Java 8 JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - To use Eclipse you must have Java 8 JDK installed on your system. Do not select Java 9 as it is not supported.
   * Make sure JDK 8 is currently the one being used/selected
@@ -57,8 +56,7 @@ Prerequisites
     * Make sure radio and mode are correct
     * Click "Configure"
    
-Installation
---------------
+### Installation ###
 * Open Eclipse IDE
 * Load current project into project Explorer
   * Right click on the project in the Project Explorer
