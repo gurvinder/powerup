@@ -1,7 +1,12 @@
 # ![frcpowerup2018](https://static.wixstatic.com/media/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png/v1/crop/x_0,y_0,w_976,h_498/fill/w_300,h_150,al_c,usm_0.66_1.00_0.01/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png)
-# FRC PowerUp 2018
+# Rahway Robotribe Robotics FRC Team #1228 
 This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Programmer] for the team. This code was written between Janruary - March 2018 [FIRST build season] and has been updated during/after competition season for various reasons including but not limited to changing PWM ports, addition/deletion of physical sensors, etc.
 * [Prerequisites](#prerequisites)
+  * Eclipse IDE
+  * Java 8 JDK
+  * Install the correct development plugins
+  * Image the roboRio
+  * Program the Radio
 * [Installation](#installation)
 
 ## Getting Started
