@@ -1,7 +1,7 @@
 <img src= "https://static.wixstatic.com/media/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png/v1/crop/x_0,y_0,w_976,h_498/fill/w_400,h_200,al_c,usm_0.66_1.00_0.01/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png"/> <img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/2018_FIRST_Power_Up_game_logo.svg/1200px-2018_FIRST_Power_Up_game_logo.svg.png" height="200px" width="400px"/>
 
 ## Rahway Robotribe Robotics FRC Team #1228 
-This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Programmer] for the team. This code was written between Janruary - March 2018 [FIRST build season] and has been updated during/after competition season for various reasons including but not limited to changing PWM ports, addition/deletion of physical sensors, etc.
+This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Programmer] for the team. This code was written between January - March 2018 [FIRST build season] and has been updated during/after competition season for various reasons including but not limited to changing PWM ports, addition/deletion of physical sensors, etc.
 * [Requirements](#requirements)
   * Eclipse IDE
   * Java 8 JDK
