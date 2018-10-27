@@ -1,7 +1,8 @@
 <img src= "https://static.wixstatic.com/media/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png/v1/crop/x_0,y_0,w_976,h_498/fill/w_400,h_200,al_c,usm_0.66_1.00_0.01/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png"/> <img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/2018_FIRST_Power_Up_game_logo.svg/1200px-2018_FIRST_Power_Up_game_logo.svg.png" height="200px" width="400px"/>
 
-## Rahway Robotribe Robotics FRC Team #1228 
+## Rahway Robotribe Robotics FRC Team #1228
 This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Programmer] for the team. This code was written between January - March 2018 and has been updated during/after competition season for various reasons including but not limited to changing PWM ports, addition/deletion of physical sensors, etc.
+* [Getting Started](#getting-started)
 * [Requirements](#requirements)
   * Eclipse IDE
   * Java 8 JDK
@@ -9,6 +10,12 @@ This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Progr
   * Image the roboRio
   * Program the Radio
 * [Installation](#installation)
+* [Built With](#built-with)
+  * wpilibj
+  * AHRS
+* [Authors](#authors)
+  * Gurvinder Singh
+* [License](#license)
 
 ### Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. These instructions will also help you deploy your code to the roboRio. See requirements & blank for notes on how to deploy the project on a live system.
@@ -43,7 +50,7 @@ These instructions will get you a copy of the project up and running on your loc
 * [Program the Radio:](https://wpilib.screenstepslive.com/s/currentCS/m/getting_started/l/144986-programming-your-radio)
   * Download the latest [FRC Radio Configuration Utility](https://firstfrc.blob.core.windows.net/frc2018/Radio/FRC_Radio_Configuration_18_1_0.zip) Installer
   * Disable WiFi connections on your computer, as it may prevent the configuration utility from properly communicating with the bridge
-  * Launch the software and refresh the available network interfaces 
+  * Launch the software and refresh the available network interfaces
   * Select the ethernet interface called "Local Area Connection"
   * Click "OK"
   * Update or re-load the FRC Firmware to OpenMesh radio
@@ -56,7 +63,7 @@ These instructions will get you a copy of the project up and running on your loc
     * Enter WPA Key - (Optional)
     * Make sure radio and mode are correct
     * Click "Configure"
-   
+
 ### Installation ###
 * Open Eclipse IDE
 * Load current project into project Explorer
@@ -64,3 +71,13 @@ These instructions will get you a copy of the project up and running on your loc
   * Select "Run As"
   * Select "WPILib Java Deploy"
     * **There is no need to reboot the roboRIO to run the new code, as the newly deployed code will begin running automatically**
+
+### Built With ###
+* [wpilibj](http://first.wpi.edu/FRC/roborio/release/docs/java/) - Set of Java classes that interfaces to the hardware in the FRC control system.
+* [AHRS](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/) - Used to control navX-MXP 9-axis inertial/magnetic sensor and motion processor.
+
+### Authors ###
+* [Gurvinder Singh](https://github.com/tubbyyyy)
+
+### License ###
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details.
