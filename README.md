@@ -13,8 +13,6 @@ This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Progr
 * [Built With](#built-with)
   * wpilibj
   * AHRS
-* [Authors](#authors)
-  * Gurvinder Singh
 * [License](#license)
 
 ### Getting Started
@@ -76,8 +74,7 @@ These instructions will get you a copy of the project up and running on your loc
 * [wpilibj](http://first.wpi.edu/FRC/roborio/release/docs/java/) - Set of Java classes that interfaces to the hardware in the FRC control system.
 * [AHRS](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/) - Used to control navX-MXP 9-axis inertial/magnetic sensor and motion processor.
 
-### Authors ###
-* [Gurvinder Singh](https://github.com/tubbyyyy)
-
 ### License ###
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details.
+- - - -
+_a project by [Gurvinder Singh](https://github.com/tubbyyyy)_
