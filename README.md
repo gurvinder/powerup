@@ -75,6 +75,6 @@ These instructions will get you a copy of the project up and running on your loc
 * [AHRS](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/) - Used to control navX-MXP 9-axis inertial/magnetic sensor and motion processor.
 
 ### License ###
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for more details.
 - - - -
 _a project by [Gurvinder Singh](https://github.com/tubbyyyy)_
