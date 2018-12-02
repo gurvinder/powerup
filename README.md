@@ -1,6 +1,9 @@
 <img src= "https://static.wixstatic.com/media/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png/v1/crop/x_0,y_0,w_976,h_498/fill/w_400,h_200,al_c,usm_0.66_1.00_0.01/949cc6_31587017db2f43738a6ee9d36b743450~mv2.png"/> <img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/2018_FIRST_Power_Up_game_logo.svg/1200px-2018_FIRST_Power_Up_game_logo.svg.png" height="200px" width="400px"/>
 
 ## Rahway Robotribe Robotics FRC Team #1228
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Java](https://img.shields.io/badge/Java-1.8.0__152-blue.svg)](https://www.java.com) [![wpilibj](https://img.shields.io/badge/wpilibj-tested-brightgreen.svg)](http://first.wpi.edu/FRC/roborio/release/docs/java/) [![AHRS](https://img.shields.io/badge/AHRS-tested-brightgreen.svg)](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/) 
+
 This is the code for FRC Power Up(2018) as written by Gurvinder Singh[Lead Programmer] for the team. This code was written between January - March 2018 and has been updated during/after competition season for various reasons including but not limited to changing PWM ports, addition/deletion of physical sensors, etc.
 * [Getting Started](#getting-started)
 * [Requirements](#requirements)
@@ -71,7 +74,7 @@ These instructions will get you a copy of the project up and running on your loc
     * **There is no need to reboot the roboRIO to run the new code, as the newly deployed code will begin running automatically**
 
 ### Built With ###
-* [wpilibj](http://first.wpi.edu/FRC/roborio/release/docs/java/) - Set of Java classes that interfaces to the hardware in the FRC control system.
+* [wpilibj](http://first.wpi.edu/FRC/roborio/release/docs/java/) - Set of Java classes that controls the hardware in the FRC control system.
 * [AHRS](https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/) - Used to control navX-MXP 9-axis inertial/magnetic sensor and motion processor.
 
 ### License ###
